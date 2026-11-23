@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0c10">
+    <title>Lensaku Admin — Kelola Produk</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="admin-products.js" defer></script>
+    <style>
+        :root {
+            --sidebar-width: 260px;
+        }
+        body {
+            background-color: #0a0c10;
+            color: #fff;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+        }
+        .sidebar-top {
+            padding: 24px;
+        }
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 35px;
+        }
+        .sidebar-menu-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(37,99,235,0.15);
+            color: var(--orange);
+        }
+        .sidebar-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+        }
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .admin-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+        .admin-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            padding: 20px;
+        }
+        .admin-modal-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 500px;
+            padding: 30px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-layout">
+        
+        <aside class="admin-sidebar">
+            <div class="sidebar-top">
+                <a href="admin.html" class="sidebar-logo">
+                    <span class="logo-icon">A</span>
+                    <span>lensaku<span class="logo-dot">.</span></span>
+                </a>
+
+                <div class="sidebar-menu-title">MENU UTAMA</div>
+                <div class="sidebar-nav">
+                    <a href="admin.html" class="sidebar-link">Dashboard</a>
+                    <a href="admin.html#adminOrderList" class="sidebar-link">Data Pesanan</a>
+                    <a href="admin-products.html" class="sidebar-link active">Kelola Produk</a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; background: var(--orange); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px;">A</div>
+                    <div>
+                        <strong style="display: block; font-size: 12px;">admin</strong>
+                        <span style="font-size: 10px; color: var(--muted);">Administrator</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" title="Keluar" style="background: transparent; border: none; color: #ff7777; cursor: pointer; font-size: 13px; font-weight: bold;">Keluar</button>
+            </div>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-topbar">
+                <div>
+                    <div class="eyebrow">MANAJEMEN KATALOG</div>
+                    <h1 style="font-family: 'Outfit', sans-serif; font-size: 28px; margin: 4px 0 6px 0;">Kelola Produk Etalase</h1>
+                    <p style="color: var(--muted); font-size: 12px; margin: 0;">Tambah, edit harga, ubah stok, atau hapus produk dari katalog penyewaan.</p>
+                </div>
+                <button id="addNewProductBtn" class="btn btn-primary" style="font-size: 12px; padding: 10px 18px;">
+                    + Tambah Produk Baru
+                </button>
+            </div>
+
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
+                <div style="margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 15px;">
+                    <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; margin: 0;">Daftar Produk Etalase</h3>
+                </div>
+
+                <div style="display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <input type="text" id="searchAdminProd" placeholder="Cari nama atau brand produk..." style="flex: 1; min-width: 220px; padding: 10px 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none; font-size: 12px;">
+                    <select id="filterAdminCategory" style="padding: 10px 14px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none; font-size: 12px;">
+                        <option value="all">Semua Kategori</option>
+                        <option value="Kamera">Kamera</option>
+                        <option value="Lensa">Lensa</option>
+                        <option value="Video">Video</option>
+                        <option value="Audio">Audio</option>
+                        <option value="Aksesoris">Aksesoris</option>
+                        <option value="Handphone">Handphone</option>
+                    </select>
+                </div>
+
+                <div id="adminProductList" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="text-align: center; padding: 30px; color: var(--muted); font-size: 12px;">Memuat produk...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL FORM TAMBAH / EDIT PRODUK -->
+    <div id="productModal" class="admin-modal" style="display: none;">
+        <div class="admin-modal-card">
+            <h3 id="modalTitle" style="font-family: 'Outfit', sans-serif; font-size: 20px; margin-top: 0; margin-bottom: 20px;">Edit Produk</h3>
+            
+            <form id="productForm" style="display: flex; flex-direction: column; gap: 14px;">
+                <input type="hidden" id="editProductId">
+                
+                <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                    Nama Produk
+                    <input type="text" id="prodName" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                </label>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                        Brand / Merk
+                        <input type="text" id="prodBrand" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                    </label>
+                    <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                        Kategori
+                        <input type="text" id="prodCategory" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                    </label>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                        Harga Sewa (Rp / hari)
+                        <input type="number" id="prodPrice" min="0" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                    </label>
+                    <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                        Stok Unit
+                        <input type="number" id="prodStock" min="0" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                    </label>
+                </div>
+
+                <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                    URL Gambar (Unsplash / Link Gambar)
+                    <input type="url" id="prodImage" required style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none;">
+                </label>
+
+                <label style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #ccc;">
+                    Deskripsi Singkat
+                    <textarea id="prodDesc" rows="2" style="padding: 10px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px; color: #fff; outline: none; resize: none;"></textarea>
+                </label>
+
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button type="button" id="cancelModalBtn" class="btn btn-outline" style="flex: 1; padding: 10px;">Batal</button>
+                    <button type="submit" class="btn btn-primary" style="flex: 1; padding: 10px;">Simpan Produk</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

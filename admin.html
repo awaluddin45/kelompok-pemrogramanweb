@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0c10">
+    <title>Lensaku Admin — Panel Pengelolaan</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="admin.js" defer></script>
+    <style>
+        :root {
+            --sidebar-width: 260px;
+        }
+        body {
+            background-color: #0a0c10;
+            color: #fff;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        /* Login Screen */
+        .admin-login-wrapper {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background: radial-gradient(circle at center, #161f2e 0%, #0a0c10 100%);
+        }
+        .admin-login-card {
+            width: 100%;
+            max-width: 420px;
+            padding: 40px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+        .admin-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(37,99,235,0.15);
+            color: var(--orange);
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        /* Layout Utama dengan Sidebar */
+        .admin-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+        .admin-sidebar {
+            width: var(--sidebar-width);
+            background: var(--surface);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 10;
+        }
+        .sidebar-top {
+            padding: 24px;
+        }
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            margin-bottom: 35px;
+        }
+        .sidebar-menu-title {
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--muted);
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 16px;
+            color: var(--muted);
+            text-decoration: none;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .sidebar-link:hover, .sidebar-link.active {
+            background: rgba(37,99,235,0.15);
+            color: var(--orange);
+        }
+        .sidebar-footer {
+            padding: 20px 24px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface);
+        }
+
+        /* Konten Utama */
+        .admin-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            padding: 40px;
+            box-sizing: border-box;
+        }
+        .admin-topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+
+        /* Kartu Statistik 4 Kolom */
+        .stat-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+        }
+
+        @media (max-width: 1024px) {
+            .stat-grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HALAMAN LOGIN ADMIN -->
+    <div id="loginSection" class="admin-login-wrapper">
+        <div class="admin-login-card">
+            <span class="admin-badge">RESTRICTED AREA</span>
+            <h2 style="font-family: 'Outfit', sans-serif; font-size: 28px; margin-bottom: 8px;">Admin Login</h2>
+            <p style="color: var(--muted); font-size: 12px; margin-bottom: 25px;">Masukkan kredensial untuk mengelola sistem rental Lensaku.</p>
+            
+            <form id="loginForm" onsubmit="return false;" style="display: flex; flex-direction: column; gap: 16px;">
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; color: #ccc;">
+                    Username Admin
+                    <input type="text" id="adminUser" placeholder="admin" autocomplete="username" style="padding: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none;">
+                </label>
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; color: #ccc;">
+                    Password
+                    <input type="password" id="adminPass" placeholder="lensaku123" autocomplete="current-password" style="padding: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none;">
+                </label>
+                <button type="button" id="loginBtn" class="btn btn-primary" style="width: 100%; margin-top: 10px;">
+                    Masuk ke Dashboard
+                </button>
+            </form>
+            <div style="text-align: center; margin-top: 20px;">
+                <a href="index.html" style="color: var(--muted); font-size: 11px; text-decoration: underline;">Kembali ke Beranda Utama</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- HALAMAN DASHBOARD ADMIN -->
+    <div id="dashboardSection" class="admin-layout" style="display: none;">
+        
+        <aside class="admin-sidebar">
+            <div class="sidebar-top">
+                <a href="#" class="sidebar-logo">
+                    <span class="logo-icon">A</span>
+                    <span>lensaku<span class="logo-dot">.</span></span>
+                </a>
+
+                <div class="sidebar-menu-title">MENU UTAMA</div>
+                <div class="sidebar-nav">
+                    <a href="admin.html" class="sidebar-link active">Dashboard</a>
+                    <a href="admin.html#adminOrderList" class="sidebar-link">Data Pesanan</a>
+                    <a href="admin-products.html" class="sidebar-link">Kelola Produk</a>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 32px; height: 32px; background: var(--orange); color: #fff; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px;">A</div>
+                    <div>
+                        <strong style="display: block; font-size: 12px;">admin</strong>
+                        <span style="font-size: 10px; color: var(--muted);">Administrator</span>
+                    </div>
+                </div>
+                <button id="logoutBtn" title="Keluar" style="background: transparent; border: none; color: #ff7777; cursor: pointer; font-size: 13px; font-weight: bold;">Keluar</button>
+            </div>
+        </aside>
+
+        <main class="admin-content">
+            <div class="admin-topbar">
+                <div>
+                    <div class="eyebrow">MANAJEMEN PENYEWAAN</div>
+                    <h1 style="font-family: 'Outfit', sans-serif; font-size: 28px; margin: 4px 0 6px 0;">Dashboard</h1>
+                    <p style="color: var(--muted); font-size: 12px; margin: 0;">Pantau dan kelola pesanan pelanggan Lensaku.</p>
+                </div>
+                <a href="index.html" class="btn btn-outline" style="font-size: 12px; padding: 10px 16px;">Lihat Website</a>
+            </div>
+
+            <!-- 4 Kotak Statistik -->
+            <div class="stat-grid-4">
+                <div class="stat-card-box">
+                    <small style="color: var(--muted); font-size: 11px;">Total Pesanan</small>
+                    <strong id="totalOrdersCount" style="display: block; font-size: 28px; font-family: 'Outfit', sans-serif; margin-top: 6px;">0</strong>
+                </div>
+                <div class="stat-card-box">
+                    <small style="color: var(--muted); font-size: 11px;">Menunggu Konfirmasi</small>
+                    <strong id="pendingOrdersCount" style="display: block; font-size: 28px; font-family: 'Outfit', sans-serif; margin-top: 6px; color: var(--orange);">0</strong>
+                    <span style="font-size: 10px; color: var(--muted); display: block; margin-top: 4px;">Perlu ditindaklanjuti</span>
+                </div>
+                <div class="stat-card-box">
+                    <small style="color: var(--muted); font-size: 11px;">Sedang Disewa</small>
+                    <strong id="activeRentalsCount" style="display: block; font-size: 28px; font-family: 'Outfit', sans-serif; margin-top: 6px; color: var(--orange);">0</strong>
+                    <span style="font-size: 10px; color: var(--muted); display: block; margin-top: 4px;">Pesanan aktif</span>
+                </div>
+                <div class="stat-card-box">
+                    <small style="color: var(--muted); font-size: 11px;">Pesanan Selesai</small>
+                    <strong id="completedOrdersCount" style="display: block; font-size: 28px; font-family: 'Outfit', sans-serif; margin-top: 6px; color: #4ade80;">0</strong>
+                    <span style="font-size: 10px; color: var(--muted); display: block; margin-top: 4px;">Penyewaan selesai</span>
+                </div>
+            </div>
+
+            <!-- Daftar Pesanan -->
+            <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 25px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 15px;">
+                    <div>
+                        <h3 style="font-family: 'Outfit', sans-serif; font-size: 18px; margin: 0 0 4px 0;">Daftar Pesanan</h3>
+                        <p style="color: var(--muted); font-size: 11px; margin: 0;">Data pesanan yang tersimpan di database.</p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button id="exportCsvBtn" class="btn btn-outline" style="font-size: 11px; padding: 6px 12px; color: #4ade80; border-color: rgba(74,222,128,0.3);">
+                            Export Laporan 
+                        </button>
+                        <button id="clearHistoryBtn" class="btn btn-outline" style="font-size: 11px; padding: 6px 12px; color: #ff7777; border-color: rgba(255,119,119,0.3);">
+                            Hapus Semua Riwayat
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Bar Pencarian & Filter -->
+                <div style="display: flex; gap: 12px; margin-bottom: 25px; flex-wrap: wrap;">
+                    <input type="text" id="searchOrderInput" placeholder="Cari nomor pesanan atau nama..." style="flex: 1; min-width: 240px; padding: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none; font-size: 12px;">
+                    <select id="filterStatusSelect" style="padding: 12px; background: var(--surface-2); border: 1px solid var(--border); border-radius: 9px; color: #fff; outline: none; font-size: 12px;">
+                        <option value="all">Semua Status</option>
+                        <option value="pending">Menunggu Konfirmasi</option>
+                        <option value="active">Sedang Disewa</option>
+                        <option value="completed">Selesai</option>
+                    </select>
+                </div>
+
+                <div id="adminOrderList" style="display: flex; flex-direction: column; gap: 15px;">
+                    <div style="text-align: center; padding: 30px; color: var(--muted); font-size: 12px;">Memuat data pesanan...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>

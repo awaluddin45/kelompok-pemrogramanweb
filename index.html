@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a0c10">
+    <meta name="description" content="Lensaku menyediakan rental kamera, lensa, dan perlengkapan video untuk kebutuhan fotografi dan videografi.">
+    <title>Lensaku — Rental Kamera dan Perlengkapan Video</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+
+    <header class="header">
+        <nav class="navbar container">
+            <a href="#" class="logo">
+                <span class="logo-icon">L</span>
+                <span>Lensaku</span>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Buka menu" aria-expanded="false">MENU</button>
+
+            <div class="nav-links" id="navLinks">
+                <a href="#beranda" class="nav-link active">Beranda</a>
+                <a href="#produk" class="nav-link">Katalog</a>
+                <a href="#keunggulan" class="nav-link">Keunggulan</a>
+                <a href="#cara-sewa" class="nav-link">Cara Sewa</a>
+                <a href="javascript:void(0)" class="nav-link" id="historyNavBtn">Riwayat Sewa</a>
+            </div>
+
+            <a href="#produk" class="nav-cta">
+                Sewa Sekarang
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero container" id="beranda">
+            <div class="hero-content">
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    YOUR CREATIVE PARTNER
+                </div>
+
+                <h1>
+                    Cerita Hebat<br>
+                    Dimulai dari<br>
+                    <span class="text-orange">Sebuah Lensa.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Temukan kamera dan perlengkapan terbaik untuk
+                    mengabadikan setiap cerita. Kualitas profesional,
+                    harga bersahabat.
+                </p>
+
+                <div class="hero-actions">
+                    <a href="#produk" class="btn btn-primary">
+                        Jelajahi Produk
+                    </a>
+                    <a href="#cara-sewa" class="btn btn-outline">
+                        Cara Menyewa
+                    </a>
+                </div>
+
+                <div class="hero-stats">
+                    <div>
+                        <strong>20+</strong>
+                        <span>Perlengkapan</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div>
+                        <strong>24/7</strong>
+                        <span>Booking online</span>
+                    </div>
+                    <div class="stat-divider"></div>
+                    <div>
+                        <strong>100%</strong>
+                        <span>Siap berkarya</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-glow"></div>
+                <div class="hero-image-wrap">
+                    <img
+                        src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=85"
+                        alt="Kamera profesional untuk fotografi"
+                        class="hero-image"
+                    >
+                    <div class="hero-image-overlay"></div>
+                </div>
+
+                <div class="floating-card card-top">
+                    <div class="floating-icon">L</div>
+                    <div>
+                        <strong>Gear pilihan</strong>
+                        <small>Untuk setiap cerita</small>
+                    </div>
+                </div>
+
+                <div class="floating-card card-bottom">
+                    <div class="mini-camera">C</div>
+                    <div>
+                        <strong>Ready to shoot?</strong>
+                        <small>Mulai petualanganmu</small>
+                    </div>
+                </div>
+
+                <div class="hero-number">01 / LENSAKU</div>
+            </div>
+        </section>
+
+        <section class="brand-strip">
+            <div class="container brand-strip-inner">
+                <span>PERALATAN DARI BRAND TERPERCAYA</span>
+                <strong>SONY</strong>
+                <strong>CANON</strong>
+                <strong>FUJIFILM</strong>
+                <strong>NIKON</strong>
+                <strong>DJI</strong>
+            </div>
+        </section>
+
+        <section class="catalog-section section-padding" id="produk">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <div class="eyebrow">OUR COLLECTION</div>
+                        <h2>Gear terbaik untuk<br><span class="text-orange">karyamu.</span></h2>
+                    </div>
+                    <p>
+                        Dari proyek profesional hingga momen sehari-hari,
+                        temukan perlengkapan yang sesuai dengan kebutuhanmu.
+                    </p>
+                </div>
+
+                <div class="catalog-toolbar">
+                    <div class="category-filters" id="categoryFilters">
+                        <button class="filter-btn active" data-category="Semua">Semua</button>
+                        <button class="filter-btn" data-category="Kamera">Kamera</button>
+                        <button class="filter-btn" data-category="Lensa">Lensa</button>
+                        <button class="filter-btn" data-category="Video">Video</button>
+                        <button class="filter-btn" data-category="Audio">Audio</button>
+                        <button class="filter-btn" data-category="Aksesoris">Aksesoris</button>
+                        <button class="filter-btn" data-category="Handphone">Handphone</button>
+                    </div>
+
+                    <label class="search-box">
+                        <input type="search" id="searchInput" placeholder="Cari perlengkapan..." aria-label="Cari produk">
+                    </label>
+                </div>
+
+                <div class="product-grid" id="productGrid">
+                    <div class="loading-state">Menyiapkan koleksi Lensaku...</div>
+                </div>
+
+                <p class="catalog-note">
+                    Sewa kamera, lensa, dan perlengkapan video untuk
+                    fotografi, videografi, maupun pembuatan konten.
+                    Harga disesuaikan dengan jenis perlengkapan dan durasi sewa.
+                </p>
+            </div>
+        </section>
+
+        <section class="feature-section section-padding" id="keunggulan">
+            <div class="container">
+                <div class="section-heading centered">
+                    <div class="eyebrow">WHY LENSAKU?</div>
+                    <h2>Lebih mudah untuk<br><span class="text-orange">mulai berkarya.</span></h2>
+                    <p>Fokus pada kreativitasmu. Urusan perlengkapan, serahkan kepada kami.</p>
+                </div>
+
+                <div class="feature-grid">
+                    <article class="feature-card">
+                        <div class="feature-icon">01</div>
+                        <h3>Kualitas Terpilih</h3>
+                        <p>Perlengkapan pilihan yang dirancang untuk mendukung hasil karya terbaikmu.</p>
+                        <span class="feature-number">01</span>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">02</div>
+                        <h3>Fleksibel</h3>
+                        <p>Pilih tanggal dan durasi sewa sesuai kebutuhan proyek atau kegiatanmu.</p>
+                        <span class="feature-number">02</span>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">03</div>
+                        <h3>Praktis</h3>
+                        <p>Pilih perlengkapan, hitung biaya, dan kirim detail permintaan sewa melalui WhatsApp.</p>
+                        <span class="feature-number">03</span>
+                    </article>
+
+                    <article class="feature-card">
+                        <div class="feature-icon">04</div>
+                        <h3>Ramah Kreator</h3>
+                        <p>Solusi perlengkapan untuk fotografer, videografer, mahasiswa, dan content creator.</p>
+                        <span class="feature-number">04</span>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="how-section section-padding" id="cara-sewa">
+            <div class="container how-layout">
+                <div class="how-intro">
+                    <div class="eyebrow">SIMPLE RENTAL</div>
+                    <h2>Tiga langkah.<br><span class="text-orange">Satu karya hebat.</span></h2>
+                    <p>Menyewa perlengkapan kini lebih mudah. Ikuti langkah sederhana berikut.</p>
+                    <a href="#produk" class="btn btn-primary">
+                        Mulai Pilih Gear
+                    </a>
+                </div>
+
+                <div class="steps-list">
+                    <article class="step-item">
+                        <span class="step-number">01</span>
+                        <div>
+                            <h3>Pilih perlengkapan</h3>
+                            <p>Jelajahi katalog dan masukkan gear yang kamu butuhkan ke keranjang.</p>
+                        </div>
+                    </article>
+
+                    <article class="step-item">
+                        <span class="step-number">02</span>
+                        <div>
+                            <h3>Tentukan jadwal</h3>
+                            <p>Isi tanggal mulai dan selesai sewa, lalu periksa estimasi total biaya.</p>
+                        </div>
+                    </article>
+
+                    <article class="step-item">
+                        <span class="step-number">03</span>
+                        <div>
+                            <h3>Konfirmasi pesanan</h3>
+                            <p>Kirim detail pesanan ke WhatsApp untuk konfirmasi ketersediaan dan pembayaran.</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section container">
+            <div class="cta-card">
+                <div class="cta-decoration">L.</div>
+                <div class="cta-content">
+                    <div class="eyebrow">YOUR NEXT STORY STARTS HERE</div>
+                    <h2>Siap menciptakan<br>sesuatu yang <span>luar biasa?</span></h2>
+                    <p>Gear yang tepat bisa menjadi awal dari cerita yang hebat.</p>
+                    <a href="#produk" class="btn btn-light">
+                        Temukan Gear-mu
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-main">
+            <div class="footer-about">
+                <a href="#" class="logo">
+                    <span class="logo-icon">L</span>
+                    <span>lensaku<span class="logo-dot">.</span></span>
+                </a>
+                <p>Teman kreatifmu untuk menemukan perlengkapan fotografi dan videografi.</p>
+                <p class="business-location">Lokasi usaha: Segera diumumkan</p>
+                <p>Kontak WhatsApp: Segera diumumkan</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navigasi</h4>
+                <a href="#beranda">Beranda</a>
+                <a href="#produk">Katalog</a>
+                <a href="#keunggulan">Keunggulan</a>
+                <a href="#cara-sewa">Cara Sewa</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Kategori</h4>
+                <a href="#produk" data-footer-category="Kamera">Kamera</a>
+                <a href="#produk" data-footer-category="Lensa">Lensa</a>
+                <a href="#produk" data-footer-category="Video">Video</a>
+                <a href="#produk" data-footer-category="Handphone">Handphone</a>
+                <a href="#produk" data-footer-category="Aksesoris">Aksesoris</a>
+            </div>
+
+            <div class="footer-column">
+                <h4>Informasi</h4>
+                <a href="#cara-sewa">Panduan Penyewaan</a>
+                <a href="#produk">Katalog Produk</a>
+                <a href="javascript:void(0)" id="contactLink">Hubungi Kami</a>
+            </div>
+        </div>
+
+        <div class="container footer-bottom">
+            <p>© <span id="currentYear"></span> Lensaku. Dibuat untuk para kreator.</p>
+            <p>Capture your best moment.</p>
+        </div>
+    </footer>
+
+    <button class="cart-fab" id="cartFab" aria-label="Buka keranjang">
+        <span>Keranjang</span>
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <div class="modal-backdrop" id="cartModal" hidden>
+        <section class="modal-panel cart-panel" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">YOUR SELECTION</div>
+                    <h2 id="cartTitle">Keranjang sewa</h2>
+                </div>
+                <button class="modal-close" data-close="cartModal" aria-label="Tutup">×</button>
+            </div>
+
+            <div class="cart-items" id="cartItems"></div>
+
+            <div class="rental-form">
+                <h3>Jadwal penyewaan</h3>
+                <div class="form-grid">
+                    <label>
+                        Tanggal mulai
+                        <input type="date" id="startDate" required>
+                    </label>
+                    <label>
+                        Tanggal selesai
+                        <input type="date" id="endDate" required>
+                    </label>
+                </div>
+
+                <label>
+                    Nama penyewa
+                    <input type="text" id="customerName" placeholder="Nama lengkap">
+                </label>
+
+                <label>
+                    Catatan tambahan
+                    <textarea id="customerNote" rows="2" placeholder="Contoh: kebutuhan acara, lokasi pengambilan..."></textarea>
+                </label>
+
+                <div class="price-summary">
+                    <div><span>Durasi sewa</span><strong id="rentalDuration">1 hari</strong></div>
+                    <div><span>Subtotal produk</span><strong id="subtotal">Rp0</strong></div>
+                    <div class="price-total"><span>Estimasi total</span><strong id="grandTotal">Rp0</strong></div>
+                </div>
+
+                <p class="form-notice">
+                    Ini adalah estimasi biaya. Pesanan belum terkonfirmasi sampai
+                    ketersediaan, ketentuan sewa, dan pembayaran disepakati.
+                </p>
+
+                <button class="btn btn-primary checkout-btn" id="checkoutBtn">
+                    Lanjutkan ke WhatsApp
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Modal Riwayat Penyewaan -->
+    <div class="modal-backdrop" id="historyModal" hidden>
+        <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="historyTitle">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow">TRANSACTION HISTORY</div>
+                    <h2 id="historyTitle">Riwayat Penyewaan</h2>
+                </div>
+                <button class="modal-close" data-close="historyModal" aria-label="Tutup">×</button>
+            </div>
+            <div class="cart-items" id="historyItemsList"></div>
+        </section>
+    </div>
+
+    <!-- Modal Detail Produk -->
+    <div class="modal-backdrop" id="productDetailModal" hidden>
+        <section class="modal-panel product-detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailProductName">
+            <div class="modal-header">
+                <div>
+                    <div class="eyebrow" id="detailProductBrand">BRAND</div>
+                    <h2 id="detailProductName">Nama Produk</h2>
+                </div>
+                <button class="modal-close" data-close="productDetailModal" aria-label="Tutup">×</button>
+            </div>
+
+            <div class="product-detail-content">
+                <img id="detailProductImage" src="" alt="Foto produk" style="width: 100%; height: 240px; object-fit: cover; border-radius: 12px; margin-bottom: 20px; background: #1a202c;">
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <span id="detailProductCategory" style="padding: 4px 10px; background: rgba(37,99,235,0.15); color: var(--orange); border-radius: 6px; font-size: 11px; font-weight: bold;">Kategori</span>
+                    <span id="detailProductStock" style="color: var(--muted); font-size: 11px; font-weight: bold;">Tersedia stok</span>
+                </div>
+
+                <div style="font-size: 20px; font-weight: bold; color: var(--orange); margin-bottom: 20px;" id="detailProductPrice">Rp0 / hari</div>
+
+                <div style="margin-bottom: 20px;">
+                    <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: #fff;">Deskripsi Singkat</h4>
+                    <p id="detailProductDescription" style="color: var(--muted); font-size: 12px; line-height: 1.8;"></p>
+                </div>
+
+                <div style="margin-bottom: 20px; background: var(--surface-2); padding: 14px; border-radius: 10px; border: 1px solid var(--border);">
+                    <h4 style="font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; color: #fff;">Spesifikasi & Kelengkapan</h4>
+                    <ul id="detailProductSpecs" style="padding-left: 16px; color: var(--muted); font-size: 11px; line-height: 1.8;">
+                        <li>Kondisi fisik: Mulus 98% (Normal & Siap Pakai)</li>
+                        <li>Kelengkapan: Unit, Baterai Original, & Charger</li>
+                        <li>Garansi fungsi 1x24 jam setelah barang diterima</li>
+                    </ul>
+                </div>
+
+                <div style="background: rgba(37, 99, 235, 0.08); padding: 14px; border-radius: 10px; border: 1px solid rgba(37, 99, 235, 0.2); margin-bottom: 24px; font-size: 11px; color: var(--muted);">
+                    <strong style="color: var(--text); display: block; margin-bottom: 4px;">Aturan & Syarat Sewa:</strong>
+                    - Wajib melampirkan identitas resmi (KTP/KTM/SIM yang berlaku).<br>
+                    - Pengambilan gear bisa dilakukan langsung atau via kurir instan.
+                </div>
+
+                <button class="btn btn-primary" id="detailAddToCartBtn" style="width: 100%;">
+                    Tambah ke Keranjang
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+</body>
+</html>
